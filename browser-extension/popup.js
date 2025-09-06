@@ -166,6 +166,13 @@ class PasswordGeneratorExtension {
 
     generatePassword() {
         const length = parseInt(this.lengthSlider.value);
+        
+        // Validate length to prevent potential issues
+        if (length < 4 || length > 128) {
+            console.error('Invalid password length requested');
+            return;
+        }
+        
         let charset = '';
         
         if (this.includeLowercase.checked) {
@@ -193,23 +200,39 @@ class PasswordGeneratorExtension {
             return;
         }
         
-        // Generate cryptographically secure password
-        const array = new Uint8Array(length);
-        crypto.getRandomValues(array);
-        
-        let password = '';
-        for (let i = 0; i < length; i++) {
-            password += charset[array[i] % charset.length];
+        // Clear any previous password from memory immediately
+        if (this.currentPassword) {
+            this.currentPassword = '';
         }
         
-        this.currentPassword = password;
-        this.passwordDisplay.value = password;
-        this.copyBtn.disabled = false;
-        this.fillPasswordBtn.disabled = false;
-        
-        // Calculate and update strength
-        const strength = this.calculatePasswordStrength(password);
-        this.updateStrengthMeter(password, strength);
+        // Generate cryptographically secure password with proper error handling
+        try {
+            const array = new Uint8Array(length);
+            crypto.getRandomValues(array);
+            
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += charset[array[i] % charset.length];
+            }
+            
+            this.currentPassword = password;
+            this.passwordDisplay.value = password;
+            this.copyBtn.disabled = false;
+            this.fillPasswordBtn.disabled = false;
+            
+            // Calculate and update strength
+            const strength = this.calculatePasswordStrength(password);
+            this.updateStrengthMeter(password, strength);
+            
+            // Clear the array from memory
+            array.fill(0);
+            
+        } catch (error) {
+            console.error('Failed to generate secure password:', error);
+            this.passwordDisplay.value = 'Error generating password';
+            this.copyBtn.disabled = true;
+            this.fillPasswordBtn.disabled = true;
+        }
     }
 
     calculatePasswordStrength(password) {
