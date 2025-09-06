@@ -2,8 +2,6 @@
 
 A secure, user-friendly password generator by GBIT Automation, available as both a desktop application and web app. Generate strong passwords with customizable options and real-time strength analysis.
 
-![Password Generator Screenshot](assets/screenshot.png)
-
 ## ✨ Features
 
 - **🎲 Secure Generation**: Uses cryptographically secure random number generation
@@ -33,7 +31,7 @@ A secure, user-friendly password generator by GBIT Automation, available as both
 
 ### Web Version
 
-Visit the hosted version at: [Your URL Here] or run locally:
+Run locally:
 
 ```bash
 # Clone or download this repository
@@ -117,9 +115,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/yourusername/password-generator/issues) page
+1. Check the [Issues](https://github.com/GBIT26/gbit-password-generator/issues) page
 2. Create a new issue with detailed information
-3. For security concerns, please email: security@yourcompany.com
+3. For security concerns, please contact us through [gbitautomation.com.au](https://gbitautomation.com.au)
 
 ## 🎯 Roadmap
 
