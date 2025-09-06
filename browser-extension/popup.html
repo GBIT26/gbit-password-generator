@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBIT Password Generator</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand-header">
+                <img src="icons/icon-48.png" alt="GBIT Logo" class="logo">
+                <div class="brand-text">
+                    <h1>Password Generator</h1>
+                    <p class="company">GBIT Automation</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="password-section">
+                <div class="password-output">
+                    <input type="text" id="passwordDisplay" readonly placeholder="Click Generate to create password">
+                    <div class="password-actions">
+                        <button id="copyBtn" class="copy-btn" disabled title="Copy to clipboard">📋</button>
+                        <button id="generateBtn" class="generate-btn">Generate</button>
+                    </div>
+                </div>
+                
+                <div class="strength-indicator">
+                    <div class="strength-bar" id="strengthBar"></div>
+                    <span class="strength-text" id="strengthText">Generate password</span>
+                </div>
+            </div>
+
+            <div class="presets-section">
+                <h3>Quick Presets</h3>
+                <div class="preset-grid">
+                    <button class="preset-btn" data-preset="basic">Basic</button>
+                    <button class="preset-btn" data-preset="strong">Strong</button>
+                    <button class="preset-btn" data-preset="secure">Secure</button>
+                </div>
+            </div>
+
+            <div class="options-section">
+                <h3>Options</h3>
+                
+                <div class="option-row">
+                    <label for="lengthSlider">Length: <span id="lengthValue">16</span></label>
+                    <input type="range" id="lengthSlider" min="4" max="64" value="16" class="slider">
+                </div>
+
+                <div class="checkbox-grid">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeLowercase" checked>
+                        <span class="checkmark"></span>
+                        Lowercase (a-z)
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeUppercase" checked>
+                        <span class="checkmark"></span>
+                        Uppercase (A-Z)
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeNumbers" checked>
+                        <span class="checkmark"></span>
+                        Numbers (0-9)
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeSymbols">
+                        <span class="checkmark"></span>
+                        Symbols (!@#$)
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="excludeSimilar">
+                        <span class="checkmark"></span>
+                        Exclude similar (0,O,1,l)
+                    </label>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <button id="fillPasswordBtn" class="fill-btn" disabled title="Fill password in active field">
+                    🔑 Fill Password
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
