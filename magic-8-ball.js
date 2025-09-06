@@ -337,7 +337,7 @@ class MysticalPasswordOracle {
             // Visual feedback
             const btn = this.copyBtn;
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<span class="btn-icon">✨</span><span class="btn-text">Transcribed!</span>';
+            btn.innerHTML = '<span class="btn-icon">✅</span><span class="btn-text">Copied!</span>';
             btn.style.background = 'linear-gradient(135deg, var(--mystical-gold), #ff8c00)';
             
             setTimeout(() => {
