@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Generate secure passwords with customizable options by GBIT Automation. Free, secure, and works offline.">
+    <meta name="theme-color" content="#b0b0b0">
+    <title>Password Generator - GBIT Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="matrix-bg.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+    <!-- Background Graphics -->
+    <div class="matrix-rain"></div>
+    <div class="cyber-symbols"></div>
+    <div class="hex-pattern"></div>
+    
+    <div class="container">
+        <header>
+            <div class="brand-header">
+                <img src="https://gbitautomation.com.au/wp-content/uploads/2024/09/GBIT-Automation-Logo-250x250.webp" alt="GBIT Automation Logo" class="company-logo">
+                <div class="brand-text">
+                    <h1>Password Generator</h1>
+                    <p class="company-name">GBIT Automation</p>
+                </div>
+            </div>
+            <p class="tagline">Create secure passwords with customizable options</p>
+        </header>
+
+        <main>
+            <div class="password-output">
+                <div class="password-display" id="passwordDisplay">
+                    Click "Generate Password" to create a secure password
+                </div>
+                <div class="password-actions">
+                    <button id="copyBtn" class="copy-btn" disabled>📋 Copy</button>
+                    <button id="generateBtn" class="generate-btn">Generate Password</button>
+                </div>
+            </div>
+
+            <div class="presets-section">
+                <h3>Quick Presets</h3>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-preset="basic">Basic (12 chars)</button>
+                    <button class="preset-btn" data-preset="strong">Strong (16 chars)</button>
+                    <button class="preset-btn" data-preset="wifi">WiFi (16 chars)</button>
+                    <button class="preset-btn" data-preset="banking">Banking (20 chars)</button>
+                </div>
+            </div>
+
+            <div class="options-section">
+                <h3>Customize Your Password</h3>
+                
+                <div class="option-group">
+                    <label for="lengthSlider">Length: <span id="lengthValue">16</span></label>
+                    <input type="range" id="lengthSlider" min="4" max="128" value="16" class="slider">
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeLowercase" checked>
+                        <span class="checkmark"></span>
+                        Include lowercase letters (a-z)
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeUppercase" checked>
+                        <span class="checkmark"></span>
+                        Include uppercase letters (A-Z)
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeNumbers" checked>
+                        <span class="checkmark"></span>
+                        Include numbers (0-9)
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeSymbols">
+                        <span class="checkmark"></span>
+                        Include symbols (!@#$%^&*)
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="excludeSimilar">
+                        <span class="checkmark"></span>
+                        Exclude similar characters (0, O, 1, l, I)
+                    </label>
+                </div>
+            </div>
+
+            <div class="strength-section">
+                <h3>Password Strength</h3>
+                <div class="strength-meter">
+                    <div class="strength-bar" id="strengthBar"></div>
+                </div>
+                <div class="strength-text" id="strengthText">Generate a password to see strength</div>
+                <div class="strength-details" id="strengthDetails"></div>
+            </div>
+
+            <div class="history-section">
+                <h3>Password History</h3>
+                <div class="history-controls">
+                    <button id="clearHistoryBtn" class="clear-btn">Clear History</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="no-history">No passwords generated yet</p>
+                </div>
+            </div>
+
+            <div class="batch-section">
+                <h3>Generate Multiple Passwords</h3>
+                <div class="batch-controls">
+                    <label for="batchCount">Number of passwords:</label>
+                    <input type="number" id="batchCount" min="1" max="20" value="5">
+                    <button id="generateBatchBtn" class="batch-btn">Generate Batch</button>
+                </div>
+                <div class="batch-output" id="batchOutput"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="matrix-enhanced.js"></script>
+</body>
+</html>

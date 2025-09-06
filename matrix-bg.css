@@ -1,0 +1,184 @@
+/* Matrix Rain Animation */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Create multiple columns of falling binary */
+.matrix-rain::before {
+    content: '1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1\A0\A1\A1\A0\A1\A0\A0\A1\A1\A0\A1';
+    position: absolute;
+    top: -200px;
+    left: 10%;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: rgba(176, 176, 176, 0.6);
+    line-height: 24px;
+    white-space: pre;
+    animation: matrix-fall-1 6s linear infinite;
+    text-shadow: 0 0 8px rgba(176, 176, 176, 0.6), 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.matrix-rain::after {
+    content: '0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1\A0\A1\A0\A0\A1\A0\A1\A1\A0\A0\A1';
+    position: absolute;
+    top: -300px;
+    right: 20%;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: rgba(181, 181, 181, 0.55);
+    line-height: 20px;
+    white-space: pre;
+    animation: matrix-fall-2 7s linear infinite 1s;
+    text-shadow: 0 0 8px rgba(181, 181, 181, 0.5), 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Additional matrix columns for more density */
+.matrix-rain {
+    background-image: 
+        /* Column 3 */
+        linear-gradient(to bottom, 
+            transparent 0px, 
+            rgba(176, 176, 176, 0.3) 100px, 
+            rgba(176, 176, 176, 0.3) 200px, 
+            transparent 300px
+        ),
+        /* Column 4 */
+        linear-gradient(to bottom, 
+            transparent 0px, 
+            rgba(181, 181, 181, 0.25) 150px, 
+            rgba(181, 181, 181, 0.25) 250px, 
+            transparent 350px
+        );
+    background-size: 2px 400px, 2px 350px;
+    background-position: 30% 0, 70% 0;
+    background-repeat: repeat-y;
+    animation: matrix-bg-scroll 12s linear infinite, matrix-bg-scroll-2 15s linear infinite;
+}
+
+@keyframes matrix-bg-scroll {
+    0% { background-position: 30% -400px, 70% -350px; }
+    100% { background-position: 30% 100vh, 70% 100vh; }
+}
+
+@keyframes matrix-bg-scroll-2 {
+    0% { background-position: 60% -300px, 90% -250px; }
+    100% { background-position: 60% 100vh, 90% 100vh; }
+}
+
+@keyframes matrix-fall-1 {
+    0% { 
+        transform: translateY(-100vh); 
+        opacity: 0; 
+    }
+    5% { 
+        opacity: 1; 
+    }
+    95% { 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateY(100vh); 
+        opacity: 0; 
+    }
+}
+
+@keyframes matrix-fall-2 {
+    0% { 
+        transform: translateY(-100vh); 
+        opacity: 0; 
+    }
+    5% { 
+        opacity: 1; 
+    }
+    95% { 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateY(100vh); 
+        opacity: 0; 
+    }
+}
+
+/* Cybersecurity symbols floating */
+.cyber-symbols {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.cyber-symbols::before {
+    content: '🔒 🔑 ⚡ 🛡️ 🔐 ⚔️';
+    position: absolute;
+    top: 20%;
+    left: -50px;
+    font-size: 20px;
+    opacity: 0.05;
+    animation: float-symbols-1 25s linear infinite;
+    filter: blur(1px);
+}
+
+.cyber-symbols::after {
+    content: '🔓 🗝️ ⚖️ 🛠️ ⚙️ 🔧';
+    position: absolute;
+    top: 60%;
+    right: -50px;
+    font-size: 18px;
+    opacity: 0.04;
+    animation: float-symbols-2 30s linear infinite 5s;
+    filter: blur(1px);
+}
+
+@keyframes float-symbols-1 {
+    0% { transform: translateX(-100px) translateY(0px) rotate(0deg); }
+    50% { transform: translateX(calc(100vw + 50px)) translateY(-50px) rotate(180deg); }
+    100% { transform: translateX(calc(100vw + 100px)) translateY(0px) rotate(360deg); }
+}
+
+@keyframes float-symbols-2 {
+    0% { transform: translateX(calc(100vw + 50px)) translateY(0px) rotate(0deg); }
+    50% { transform: translateX(-50px) translateY(50px) rotate(-180deg); }
+    100% { transform: translateX(-100px) translateY(0px) rotate(-360deg); }
+}
+
+/* Subtle hex pattern overlay */
+.hex-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -3;
+    background-image: 
+        radial-gradient(circle at 25% 75%, rgba(176, 176, 176, 0.01) 0%, transparent 25%),
+        radial-gradient(circle at 75% 25%, rgba(181, 181, 181, 0.01) 0%, transparent 25%);
+    background-size: 150px 150px;
+    background-position: 0 0, 75px 75px;
+}
+
+/* Disable animations on mobile for performance */
+@media (max-width: 768px) {
+    .matrix-rain::before,
+    .matrix-rain::after,
+    .cyber-symbols::before,
+    .cyber-symbols::after {
+        animation: none;
+        display: none;
+    }
+    
+    .hex-pattern {
+        opacity: 0.5;
+    }
+}

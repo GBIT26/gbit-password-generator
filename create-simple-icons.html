@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Icons</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { margin: 10px; border: 1px solid #ccc; }
+        .download-link { margin: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>Icon Generator</h1>
+    <p>Right-click each canvas and "Save image as..." to download.</p>
+    
+    <div id="canvases"></div>
+    <button onclick="downloadAll()">Download All Icons</button>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a1a1a');
+            
+            // Draw rounded rectangle background
+            const radius = size * 0.2;
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            
+            // Draw lock icon
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = size * 0.08;
+            
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const lockSize = size * 0.4;
+            
+            // Lock body
+            ctx.fillRect(
+                centerX - lockSize/2, 
+                centerY - lockSize/6, 
+                lockSize, 
+                lockSize * 0.6
+            );
+            
+            // Lock shackle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY - lockSize/3, lockSize/3, Math.PI, 0, false);
+            ctx.stroke();
+            
+            // Keyhole
+            ctx.fillStyle = '#b0b0b0';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, size * 0.04, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillRect(
+                centerX - size * 0.02,
+                centerY,
+                size * 0.04,
+                size * 0.08
+            );
+        }
+
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function downloadAll() {
+            const canvases = document.querySelectorAll('canvas');
+            canvases.forEach((canvas, index) => {
+                setTimeout(() => {
+                    downloadCanvas(canvas, `icon-${sizes[index]}.png`);
+                }, index * 500);
+            });
+        }
+
+        // Generate all icons
+        const container = document.getElementById('canvases');
+        sizes.forEach(size => {
+            const canvas = document.createElement('canvas');
+            const label = document.createElement('div');
+            label.textContent = `${size}x${size}`;
+            
+            container.appendChild(label);
+            container.appendChild(canvas);
+            
+            drawIcon(canvas, size);
+        });
+
+        // Add roundRect polyfill for older browsers
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.arcTo(x + width, y, x + width, y + radius, radius);
+                this.lineTo(x + width, y + height - radius);
+                this.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+                this.lineTo(x + radius, y + height);
+                this.arcTo(x, y + height, x, y + height - radius, radius);
+                this.lineTo(x, y + radius);
+                this.arcTo(x, y, x + radius, y, radius);
+                this.closePath();
+            };
+        }
+    </script>
+</body>
+</html>

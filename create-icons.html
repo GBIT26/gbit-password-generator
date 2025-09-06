@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create App Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px;
+        }
+        .download-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Create App Icons</h1>
+    
+    <p>Generate icons for your password generator app. Right-click each icon and "Save image as..." to download.</p>
+
+    <div class="icon-preview">
+        <canvas id="icon512" width="512" height="512"></canvas>
+        <div>512x512 (App Icon)</div>
+    </div>
+
+    <div class="icon-preview">
+        <canvas id="icon192" width="192" height="192"></canvas>
+        <div>192x192 (PWA)</div>
+    </div>
+
+    <div class="icon-preview">
+        <canvas id="icon128" width="128" height="128"></canvas>
+        <div>128x128 (Windows)</div>
+    </div>
+
+    <div class="icon-preview">
+        <canvas id="icon72" width="72" height="72"></canvas>
+        <div>72x72 (Mobile)</div>
+    </div>
+
+    <div class="download-section">
+        <h3>📥 Save Instructions</h3>
+        <ol>
+            <li>Right-click each icon above</li>
+            <li>Select "Save image as..."</li>
+            <li>Save to the <code>assets/</code> folder with these names:
+                <ul>
+                    <li><code>icon-512.png</code></li>
+                    <li><code>icon-192.png</code></li>
+                    <li><code>icon-128.png</code></li>
+                    <li><code>icon-72.png</code></li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>🎯 Alternative: Online Icon Generators</h3>
+        <p>For professional icons, try these free tools:</p>
+        <ul>
+            <li><a href="https://www.favicon-generator.org/">Favicon Generator</a></li>
+            <li><a href="https://realfavicongenerator.net/">RealFaviconGenerator</a></li>
+            <li><a href="https://icon.kitchen/">Icon Kitchen</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function drawIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient - Black and white theme
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#000000');
+            gradient.addColorStop(1, '#1a1a1a');
+            
+            // Draw rounded rectangle background
+            const radius = size * 0.2;
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            
+            // Draw lock icon
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = size * 0.08;
+            
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const lockSize = size * 0.4;
+            
+            // Lock body
+            ctx.fillRect(
+                centerX - lockSize/2, 
+                centerY - lockSize/6, 
+                lockSize, 
+                lockSize * 0.6
+            );
+            
+            // Lock shackle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY - lockSize/3, lockSize/3, Math.PI, 0, false);
+            ctx.stroke();
+            
+            // Keyhole
+            ctx.fillStyle = '#b0b0b0';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, size * 0.04, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillRect(
+                centerX - size * 0.02,
+                centerY,
+                size * 0.04,
+                size * 0.08
+            );
+        }
+
+        // Generate all icon sizes
+        drawIcon('icon512', 512);
+        drawIcon('icon192', 192);
+        drawIcon('icon128', 128);
+        drawIcon('icon72', 72);
+
+        // Add rounded rectangle support for older browsers
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.arcTo(x + width, y, x + width, y + radius, radius);
+                this.lineTo(x + width, y + height - radius);
+                this.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+                this.lineTo(x + radius, y + height);
+                this.arcTo(x, y + height, x, y + height - radius, radius);
+                this.lineTo(x, y + radius);
+                this.arcTo(x, y, x + radius, y, radius);
+                this.closePath();
+            };
+        }
+    </script>
+</body>
+</html>

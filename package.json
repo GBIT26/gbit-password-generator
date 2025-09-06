@@ -1,0 +1,54 @@
+{
+  "name": "gbit-password-generator",
+  "version": "1.0.0",
+  "description": "A secure password generator with customizable options by GBIT Automation",
+  "main": "electron-main.js",
+  "homepage": "./index.html",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "dist": "npm run build",
+    "pack": "electron-builder --dir",
+    "web": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "password",
+    "generator",
+    "security",
+    "desktop",
+    "electron",
+    "gbit-automation"
+  ],
+  "author": "GBIT Automation <contact@gbitautomation.com.au>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.gbitautomation.passwordgenerator",
+    "productName": "GBIT Password Generator",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "script.js",
+      "electron-main.js",
+      "assets/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
