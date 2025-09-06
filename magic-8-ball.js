@@ -430,8 +430,8 @@ class MysticalPasswordOracle {
                     pointer-events: none;
                     z-index: 1000;
                     box-shadow: 0 0 10px var(--mystical-gold);
-                    left: ${this.ballOuter.getBoundingClientRect().left + Math.random() * 280}px;
-                    top: ${this.ballOuter.getBoundingClientRect().top + Math.random() * 280}px;
+                    left: ${this.ballOuter.getBoundingClientRect().left + Math.random() * 380}px;
+                    top: ${this.ballOuter.getBoundingClientRect().top + Math.random() * 380}px;
                     animation: particleFade 2s ease-out forwards;
                 `;
                 
